@@ -75,7 +75,9 @@ class Search extends Component {
                         <p>{listItems.length} trajets allant de {firstData[0].fromcity} à {firstData[0].tocity} publiés</p>
                     </div>
                     {firstData.map((post) => <RenderResult key={post.id} from={post.fromcity} to={post.tocity} post={post} handleClick={this.handleClick} />)}
-                    {isFetching && 'Fetching more list items...'}
+                    <div style={{textAlign:"center", margin:"10px"}}>
+                        <p>{isFetching && 'Fetching more list items...'}</p>
+                    </div>
                 </div>
             )
         }
