@@ -76,7 +76,7 @@ class Search extends Component {
                     </div>
                     {firstData.map((post) => <RenderResult key={post.id} from={post.fromcity} to={post.tocity} post={post} handleClick={this.handleClick} />)}
                     <div style={{textAlign:"center", margin:"10px"}}>
-                        <p>{isFetching && 'Fetching more list items...'}</p>
+                        <p>{isFetching && "Récupérer plus d'éléments..."}</p>
                     </div>
                 </div>
             )
