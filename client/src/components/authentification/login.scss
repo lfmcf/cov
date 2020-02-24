@@ -1,0 +1,84 @@
+@import '../../globals';
+.login-container {
+    width: 70%;
+    height: calc(100vh - 10vh);
+    margin: auto;
+    overflow: hidden;
+    // border: 1px solid black;
+}
+.login-container-wraper {
+    display: grid;
+    justify-items: center;
+    margin-top: 50px;
+}
+.login_email_form {
+    display: grid;
+}
+.title {
+    margin-bottom: 20px;
+}
+.login_email_form input {
+    border: 1px solid #eee;
+    width: 500px;
+    line-height: 1.5em;
+    border-radius: 5em;
+    color: inherit;
+    padding: 0.6em 0.9em;
+    font-family: $secondFont;
+}
+.login-facebook i {
+    margin-right: 10px;
+}
+
+.login_email_button {
+    border: none;
+    padding: 10px 40px;
+    border-radius: 20px;
+    color: white;
+    background-color: #1eb0f2;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: $secondFont;
+    margin: 20px;
+    justify-self: center;
+}
+.loginBtn {
+    cursor: pointer;
+    border: none;
+    background-color:#3c5a96;
+    padding: 10px 40px;
+    font-size: 16px;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    font-family: $secondFont;
+    font-weight: 100;
+}
+
+.face-para p {
+    font-size: 14px;
+    color: #606066;
+    letter-spacing: 1px;
+    margin: 10px;
+}
+
+.invalid-feedback {
+    font-size: 13px;
+    text-align: center;
+    color: $redColor;
+    font-family: $thirdFont;
+    padding: 5px;
+}
+
+@media (max-width: 414px) {
+    .login-container {
+        width: 100%;
+    }
+
+    .login_email_form input {
+        width: 300px;
+    }
+    .login-facebook i {
+        margin-right: 5px;
+    }
+}

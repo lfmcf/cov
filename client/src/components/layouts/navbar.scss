@@ -1,0 +1,272 @@
+@import '../../globals';
+
+
+.nav-container {
+    width: 100%;
+    // height: 60px;
+    background: $thirdColor;
+}
+.navDesktop {
+    max-width: 1720px;
+    height: 10vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-family: $firstFont;
+    //border-bottom: 1px solid gray;
+    .logo {
+        align-self: center;
+        margin-left: 60px ;
+    }
+    .right-menu {
+        align-self: center;
+        justify-self: end;
+        margin-right: 60px;
+        i {
+            margin: 5px;
+            font-size: 15px;
+        }
+    }
+    .avatar {
+        position: relative;
+        img{
+            border-radius: 50%; 
+            vertical-align: middle;
+            height: 35px;
+            margin-right: 20px ;
+        }
+    }
+}
+
+.navMobile {
+    height: 10vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-family: $firstFont;
+    .mobileRightMenu {
+        align-self: center;
+        // border: 1px solid black;
+        i{
+            padding-left: 12px;
+        }
+    }
+    .mobileLogo {
+        align-self: center;
+        text-align: center;
+    }
+    .mobileAvatar {
+        align-self: center;
+        justify-self: end;
+        img{
+            border-radius: 50%; 
+            vertical-align: middle;
+            height: 35px;
+            margin-right: 20px ;
+        }
+        i{
+            padding-right: 20px;
+        }
+    }
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    font-family: $firstFont;
+}
+
+.menu-list li {
+    display: inline-block;
+    padding-left: 30px; 
+}
+
+.nav-link a {
+    color: $secondColor;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 60px; 
+    right: 0;
+    background-color:white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    li {
+        display: block;
+        padding: 5px;
+    }
+}
+
+// @media (min-width: 1200px) {
+//     nav {
+//         max-width: 1720px;
+//         height: 100%;
+//         display: grid;
+//         grid-template-columns: 1fr 1fr;
+//         font-family: $firstFont;
+        
+//         .logo {
+//             grid-column: 1;
+//             align-self: center;
+//             margin-left: 60px ;
+//         }
+//         .left-menu {
+//             display: none;
+//         }
+//         .right-menu {
+//             grid-column: 2;
+//             align-self: center;
+//             justify-self: end;
+//             margin-right: 60px;
+//             i {
+//                 margin: 5px;
+//                 font-size: 15px;
+//             }
+//         }
+        
+//         .login {
+//             display: none;
+//         }
+//         .avatar {
+//             position: relative;
+//             img{
+//                 border-radius: 50%; 
+//                 vertical-align: middle;
+//                 height: 35px;
+//                 margin-right: 20px ;
+//             }
+//         }
+//     }
+    
+    
+// }
+// @media (min-width: 992px) {
+//     nav {
+//         max-width: 1720px;
+//         height: 100%;
+//         display: grid;
+//         grid-template-columns: 1fr 1fr;
+//         font-family: $firstFont;
+//         .logo {
+//             grid-column: 1;
+//             align-self: center;
+//             margin-left: 30px ;
+//         }
+//         .left-menu {
+//             display: none;
+//         }
+//         .right-menu {
+//             grid-column: 2;
+//             align-self: center;
+//             justify-self: end;
+//             margin-right: 10px;
+//             i {
+//                 margin: 5px;
+//                 font-size: 15px;
+//             }
+//         }
+//         .login {
+//             display: none;
+//         }
+//         .avatar {
+//             position: relative;
+//             img{
+//                 border-radius: 50%; 
+//                 vertical-align: middle;
+//                 height: 35px;
+//                 margin-right: 20px ;
+//             }
+//         }
+//     }
+// }
+
+// @media (max-width: 768px) {
+//     nav {
+//         max-width: 1720px;
+//         height: 100%;
+//         display: grid;
+//         grid-template-columns: 1fr 1fr 1fr;
+//         font-family: $firstFont;
+//         .logo {
+//             grid-column: 2;
+//             align-self: center;
+//             justify-self: center;
+//         }
+//         .left-menu {
+//             grid-column: 1;
+//             display: inline-block;
+//             align-self: center;
+//             margin-left: 15px ;
+//             i {
+//                 font-size: 24px;
+//                 margin-right: 25px;
+//             }
+//         }
+//         .right-menu {
+//             display: none;
+//         }
+//         .login {
+//             grid-column: 3;
+//             display: inline-block;
+//             align-self: center;
+//             justify-self: end;
+//         }
+//         .avatar {
+//             position: relative;
+//             img{
+//                 border-radius: 50%; 
+//                 vertical-align: middle;
+//                 height: 35px;
+//                 margin-right: 8px ;
+//             }
+//         }
+//     }
+
+// }
+
+// @media (max-width: 576px) {
+//     nav {
+//         max-width: 1720px;
+//         height: 100%;
+//         display: grid;
+//         grid-template-columns: 1fr 1fr 1fr;
+//         font-family: $firstFont;
+//         .logo {
+//             grid-column: 2;
+//             align-self: center;
+//             justify-self: center;
+//         }
+//         .left-menu {
+//             grid-column: 1;
+//             display: inline-block;
+//             align-self: center;
+//             margin-left: 15px ;
+//             i {
+//                 font-size: 18px;
+//                 margin-right: 20px;
+//             }
+//         }
+//         .right-menu {
+//             display: none;
+//         }
+//         .login {
+//             grid-column: 3;
+//             display: inline-block;
+//             align-self: center;
+//             margin-right: 20px;
+//         }
+
+//         .avatar {
+//             position: relative;
+//             img{
+//                 border-radius: 50%; 
+//                 vertical-align: middle;
+//                 height: 30px;
+//                 margin-right: 2px ;
+//             }
+//         }
+//     }
+    
+// }

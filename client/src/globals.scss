@@ -1,0 +1,25 @@
+$firstColor : #1da3f9;
+$secondColor:black;
+$thirdColor: #FFF;
+$greenColor: #62cf6c;
+$redColor: #e8453c;
+$orangeColor: #f9bb2d;
+$ogreenColor: #3aa757;
+
+$firstFont: 'Cormorant Garamond', serif;
+$secondFont: 'Quattrocento', serif;
+$thirdFont: 'Gentium Basic', serif;
+$forthFont: 'Enriqueta', serif;
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: $firstFont;
+}
+
+p {
+    font-family: $secondFont;
+}
+
+a {
+    text-decoration: none;
+    font-family: $forthFont;
+}

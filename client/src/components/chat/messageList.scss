@@ -1,0 +1,39 @@
+.message-list-container {
+    padding: 10px;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+}
+
+.message .bubble-container .bubble {
+    margin: 1px 0px;
+    background: #f4f4f8;
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 75%;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+.message.mine .bubble-container .bubble{
+    background: #007aff;
+    color: white;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.message .bubble-container {
+    font-size: 14px;
+    display: flex;
+  }
+  
+.message.mine .bubble-container {
+    justify-content: flex-end;
+}
+

@@ -1,0 +1,98 @@
+.login-container {
+    text-align: center; 
+}
+
+.login-container-wraper {
+    display: inline-block;
+    margin: 30px;
+    padding: 20px;
+    width: 50%;
+}
+
+.login-container-wraper div {
+    margin-bottom: 30px; 
+}
+.login-container-wraper p {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 30px; 
+    word-spacing: 5px;
+}
+.loginBtn {
+    cursor: pointer;
+    border: none;
+    background-color:#3c5a96;
+    padding: 12px 20px;
+    font-size: 20px;
+    color: white;
+    border-radius: 10px; 
+    width: 50%;
+    display: inline-block;
+}
+
+.login_email_form input {
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    margin: 2px 0;
+    font-size: 17px;
+    /* line-height: 20px; */
+    text-decoration: none;
+    border: 1px solid #ccc;
+    width: 50%;
+}
+
+.login_email_button {
+    border: none;
+    padding: 15px 20px;
+    border-radius: 20px;
+    color: white;
+    background-color: #1eb0f2;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.vl {
+   width: 100%;
+   border-bottom: 1px solid #000; 
+   line-height: 0.1em;
+}
+.vl-innertext {
+    background:#fff; 
+    padding:0 10px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .login-container-wraper {
+        display: inline-block;
+        margin: 0;
+        padding: 20px;
+        width: 70%;
+        
+    }
+
+    .loginBtn {
+        cursor: pointer;
+        border: none;
+        background-color:#3c5a96;
+        padding: 10px 10px;
+        font-size: 14px;
+        color: white;
+        border-radius: 10px; 
+        width: 100%;
+        display: inline-block;
+    }
+
+    .login_email_form input {
+        padding: 8px;
+        border: none;
+        border-radius: 10px;
+        /* margin: 2px 0; */
+        font-size: 14px;
+        /* line-height: 20px; */
+        text-decoration: none;
+        border: 1px solid #ccc;
+        width: 90%;
+    }
+}

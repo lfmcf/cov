@@ -1,0 +1,30 @@
+@import '../../globals';
+.messenger {
+    display: grid;
+    width: 100%;
+    height: calc(100vh - 10vh);
+    background: #eeeef1;
+    grid-template-columns: 350px auto;
+    grid-template-rows: 60px auto 60px;
+    grid-column-gap: 1px;
+    grid-row-gap: 1px;
+    border: 1px solid black;
+}
+
+.scrollable {
+    position: relative;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .sidebar {
+    background: white;
+    grid-row-start: 1;
+    grid-row-end: span 3;
+  }
+  
+  .content {
+    background: white;
+    grid-row-start: 1;
+    grid-row-end: span 3;
+  }

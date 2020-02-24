@@ -1,0 +1,88 @@
+@import '../globals';
+
+.heading {
+    height: calc(100vh - 10vh);
+    background-color: $greenColor;
+    display: grid;
+}
+.row {
+    //border: 1px solid black;
+    margin: auto;
+    width: 60%;
+    text-align: center;
+}
+
+.colmun h1 {
+    margin: 0 0 25px 0;
+}
+
+.searchLink {
+    margin: 15px;
+    display: inline-block;
+    color: white;
+    background-color: $firstColor;
+    padding:0.7em 2em;
+    //text-transform: uppercase;
+    // font-weight:400;
+    border-radius:2em;
+}
+
+.section_container {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    
+}
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+.sec_row {
+    width: 60%;
+    margin: auto;
+    text-align: center;
+}
+
+.sec_row h1{
+    font-weight: 1000;
+    font-size: 3em;
+    margin: 50px 0 20px 0;
+    
+}
+
+.sec_row p{
+    line-height: 1.5;
+    letter-spacing: 1px;
+    color: #3d3e40;
+}
+.volant {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    //grid-gap: 30px;
+}
+.items {
+    border: 1px solid gray;
+    
+}
+.items span {
+    font-size: 3.5em;
+    color: $redColor;
+    font-weight: 200;
+}
+
+@media (max-width: 414px) {
+    .row {
+        width: 100%;
+    }
+    .container {
+        width: 95%;
+    }
+    .sec_row {
+        width: 100%;
+    }
+    .volant {
+        margin-top: 80px;
+        grid-template-columns: 1fr;
+    }
+}
