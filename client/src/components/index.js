@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './index.scss';
 import {Link} from 'react-router-dom';
-// import img from './assests/images/bg.jpg'
+import post1 from './assests/images/post-1.jpg'
 // import map from './assests/images/homeboy1bg.jpg'
 class Home extends Component {
 
@@ -16,47 +16,39 @@ class Home extends Component {
                         <div className="colmun">
                             <h1 >Et vous, qui allez-vous retrouver ?</h1>
                             <h2>Some text here also</h2>
-                            <Link to="/search" className="searchLink">chercher</Link>
+                            <Link to="/search" className="searchLink">Chercher</Link>
                         </div>
                     </div>
                 </div>
-                <div className="section_container">
-                    <div className="items">
-                        <div className="sec_row">
-                            <h1 >Qu'est Nous ?</h1>
-                            <p>On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même</p>
-                        </div>
+                <div className="image_text">
+                    <div className="image">
+                        {/* <img src={post1} width="100%"/> */}
                     </div>
-                    <div className="items" >
-                        <div className="volant">
-                            <div className="">
-                                <span><i  className="fas fa-car"></i></span>
-                                <h3>Vous prenez le volant ? Dites-nous où vous allez !</h3>
-                                <p>Ensemble, permettons à des millions de personnes de se déplacer.</p>
-                            </div>
-                            <div className="">
-                                <span><i className="fas fa-users"></i></span>
-                                <h3>Vous prenez le volant ? Dites-nous où vous allez !</h3>
-                                <p>Ensemble, permettons à des millions de personnes de se déplacer.</p>
-                            </div>
-                            <div className="">
-                                <span><i className="fas fa-road"></i></span>
-                                <h3>Vous prenez le volant ? Dites-nous où vous allez !</h3>
-                                <p>Ensemble, permettons à des millions de personnes de se déplacer.</p>
-                            </div>
-                        </div>
+                    <div className="text">
+                        <h1>Vous prenez le volant ? Dites-nous où vous allez !</h1>
+                        <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum.</p>
+                        <button>Proposez un trajet</button>
                     </div>
-                    <div className="items">
-                        <div style={{width:"60%",margin:'auto',textAlign:"center"}}>
-                            <p>Vous prenez le volant ? Dites-nous où vous allez !</p>
-                            <p>Ensemble, permettons à des millions de personnes de se déplacer.</p>
-                            <button>Proposer un Trajet</button>
-                        </div>
-                    </div>
-                
                 </div>
-                
-                
+                <div className="infos">
+                    <div className="desc">
+                        <h1>Allez où vous voulez. D'où vous voulez.</h1>
+                        <div className="desc_cols">
+                            <div>
+                                <h3>Pratique</h3>
+                                <p>Trouvez rapidement un covoiturage ou un bus à proximité parmi les millions de trajets proposés.</p>
+                            </div>
+                            <div>
+                                <h3>Facile</h3>
+                                <p>Trouvez le trajet parfait ! Il vous suffit d’entrer votre adresse exacte, de choisir le voyage qui vous convient le mieux, et de réserver.</p>
+                            </div>
+                            <div>
+                                <h3>Direct</h3>
+                                <p>Que vous prévoyiez à l’avance ou réserviez en dernière minute, vous trouverez toujours un tarif avantageux.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
