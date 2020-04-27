@@ -16,7 +16,7 @@ class Home extends Component {
                         <div className="colmun">
                             <h1 >Et vous, qui allez-vous retrouver ?</h1>
                             <h2>Some text here also</h2>
-                            <Link to="/search" className="searchLink">Chercher</Link>
+                            <Link to="/recherche" className="searchLink">Chercher</Link>
                         </div>
                     </div>
                 </div>
@@ -27,7 +27,8 @@ class Home extends Component {
                     <div className="text">
                         <h1>Vous prenez le volant ? Dites-nous où vous allez !</h1>
                         <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum.</p>
-                        <button>Proposez un trajet</button>
+                        {/* <button>Proposez un trajet</button> */}
+                        <Link to="/add_post_step_1" className="searchLink">Proposer un trajet</Link>
                     </div>
                 </div>
                 <div className="infos">

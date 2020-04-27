@@ -28,18 +28,17 @@ class NavigationBar extends Component {
 
     
     render() {
-        const show = this.props.dropDownToggle
-        const user = this.props.user
+        const {user, notice, dropDownToggle} = this.props
         let laptop, mobile = null
         if(user) {
             laptop = <div className="navDesktop">
-            <div className="logo">
+            <div className="logo nav-link">
                 <h3><Link to="/">Covoiturage</Link></h3>
             </div>
             <div className="right-menu" id="right-menu">
                 <ul className="menu-list nav-link">
                     <li>
-                        <Link to="search">
+                        <Link to="recherche">
                             <i className="fa fa-search"></i>
                             Rechercher
                         </Link>
@@ -53,16 +52,16 @@ class NavigationBar extends Component {
                     
                     <li>
                         <Link to="/messages" >
-                            <i className="fa fa-envelope-o" aria-hidden="true"></i>
+                            <i className="fa fa-envelope-o" aria-hidden="true" style={{color:'red'}}>{notice > 0 ? notice : ''}</i>
                             Messages
                         </Link>
                     </li>
-                    <li className="avatar" ref={this.props.node}>
+                    <li className="avatar" ref={this.props.node} onClick={this.props.toggleDropdown}>
                         <img alt="avatar" className="profile-pic" src={pic}  />
                     </li>
                 </ul>
             </div>
-            <div className="dropdown-content nav-link" id="dc" style={{display: show ? "" : "none"}}>
+            <div className="dropdown-content nav-link" id="dc" style={{display: dropDownToggle ? "" : "none"}}>
                 <ul>
                     <li>
                         <Link to="profile">Profile</Link>
@@ -75,21 +74,21 @@ class NavigationBar extends Component {
         </div>
         mobile = <div className="navMobile">
         <div className="mobileRightMenu nav-link">
-            <Link to="search" className="search">
+            <Link to="recherche" className="search">
                 <i className="fa fa-search" aria-hidden="true"></i>
             </Link>
-            <Link to="/ajouter" className="proposer">
+            <Link to="/add_post_step_1" className="proposer">
                 <i className="fa fa-plus" aria-hidden="true"></i>
             </Link>
         </div>
         <div className="mobileLogo nav-link">
             <h3><Link to="/">Covoiturage</Link></h3>
         </div>
-        <div className="mobileAvatar" ref={this.props.node}>
+        <div className="mobileAvatar" onClick={this.props.toggleDropdown}>
             <img alt="avatar" className="profile-pic" src={pic} />
         </div>
-        <div className="dropdown-content" id="dc" style={{display: show ? "" : "none"}}>
-                <ul>
+        <div className="dropdown-content" id="dc" style={{display: dropDownToggle ? "" : "none"}}>
+                <ul className="dropdown-list">
                     <li>
                         <Link to="messages">Messages</Link>
                     </li>
@@ -110,7 +109,7 @@ class NavigationBar extends Component {
             <div className="right-menu" id="right-menu">
                 <ul className="menu-list nav-link">
                     <li>
-                        <Link to="search">
+                        <Link to="recherche">
                             <i className="fa fa-search"></i>
                             Rechercher
                         </Link>
@@ -133,7 +132,7 @@ class NavigationBar extends Component {
         </div>
         mobile = <div className="navMobile">
         <div className="mobileRightMenu nav-link">
-            <Link to="search" className="search">
+            <Link to="recherche" className="search">
                 <i className="fa fa-search" aria-hidden="true"></i>
             </Link>
             <Link to="/add_post_step_1" className="proposer">

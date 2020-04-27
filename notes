@@ -1,0 +1,91 @@
+ <tr>
+                <td><small>{timeDepart}</small> {post.fromcity}</td>
+                <td><small>{time}</small> {arriver}</td>
+                
+                <td>{prix}</td>
+                <td>
+                </td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { Component } from 'react'
+import './conversationList.scss';
+import ConversationItem from './conversationItem';
+
+class ConversationList extends Component {
+    
+    handleClick = (e, id, unread) => {
+        console.log(e.target.parentNode)
+        this.props.getconvo(id, unread)
+    } 
+    
+    render() {
+        const { conversations } = this.props
+        
+        // if(data.length > 0) {
+        //     data.map((dt) => {
+        //         console.log(dt.unread)
+        //     })
+        // }
+        //var className = ''
+        
+        var sk = conversations.map((dt) => {
+
+            if (dt.unread) {
+                return (<div className='conversation-list-item unread' key={dt.c_id}>
+
+                    <img className="conversation-photo" src="https://randomuser.me/api/portraits/men/17.jpg" alt="conversation" />
+                    <div className="conversation-info" onClick={(e) => this.handleClick(e, dt.c_id, dt.unread)}>
+                        <h1 className="conversation-title">{dt.nom}</h1>
+                        <p className="conversation-snippet">Test, which is a new approach to have all solutions
+                                astrology under one roof.</p>
+                    </div>
+                    <p> + {dt.unread}</p>
+                </div>)
+            } else {
+                return (
+                    <div className='conversation-list-item' key={dt.c_id}>
+
+                        <img className="conversation-photo" src="https://randomuser.me/api/portraits/men/17.jpg" alt="conversation" />
+                        <div className="conversation-info" onClick={(e) => this.handleClick(e, dt.c_id, dt.unread)}>
+                            <h1 className="conversation-title">{dt.nom}</h1>
+                            <p className="conversation-snippet">Test, which is a new approach to have all solutions
+                                        astrology under one roof.</p>
+                        </div>
+                    </div>
+                )
+            }
+
+        })
+        
+        return(
+           <div>
+               <h1>CHATS</h1>
+               {sk}
+                {/* {data.map((dt) => (
+                    <div className='conversation-list-item' key={dt.c_id}>
+
+                        <img className="conversation-photo" src="https://randomuser.me/api/portraits/men/17.jpg" alt="conversation" />
+                        <div className="conversation-info" onClick={() => this.props.getconvo(dt.c_id)}>
+                            <h1 className="conversation-title">{dt.nom}</h1>
+                            <p className="conversation-snippet">Test, which is a new approach to have all solutions
+                                        astrology under one roof.</p>
+                        </div>
+                    </div>
+                ))} */}
+           </div>
+        );
+    }
+}
+
+export default ConversationList;

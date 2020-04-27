@@ -36,9 +36,10 @@ class Recherche extends Component {
         }
         axios.post('api/search', post, {headers: {'Content-Type': 'application/json'}}).then(res => {
             this.props.hideLoader()
+            console.log(res.data)
             this.props.history.push({
                 pathname : 'show',
-                state: { data: res.data.psts, prevPath: this.props.location.pathname }
+                state: { data: res.data.posts,vers:post.to, prevPath: this.props.location.pathname }
             })    
         })
     }
@@ -65,7 +66,7 @@ class Recherche extends Component {
                         <input type="text" className="input" value={this.state.moment.format(str)} readOnly />
                     </DatetimePickerTrigger>
                 </div>
-                <div className="form-row">
+                <div className="form-row test-submit">
                     <button className="submitForm">chercher</button>
                 </div>
             </form>

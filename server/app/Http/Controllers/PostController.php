@@ -10,11 +10,7 @@ class PostController extends Controller
 {
     public function creatPost(Request $request)
     {
-    	//$from = $request->json()->get('from');
-    	//$to = $request->json()->get('to');
-    	//$other = $request->json()->get('other');
-    	//$infos = $request->json()->get('prix');
-    	// $infos = $infos[0];
+    	
     	$post = Post::create([
     		'from' => $request->json()->get('from'),
             'fromcity' => $request->json()->get('fromcity'),
@@ -43,22 +39,32 @@ class PostController extends Controller
         $posts = Post::with('users')->where([
             ['fromcity', '=', $from],
             ['tocity', '=', $to],
+        ])->orWhere([
+            ['fromcity', "=", $from],
+            ['passbycity', "=", $to],
         ])->get();
         
-        $pp = Post::with('users')->where([
-            ['fromcity', '=', $from],
-            ['passbycity', '=', $to]
-        ])->get();
+        // $pp = Post::with('users')->where([
+        //     ['fromcity', '=', $from],
+        //     ['passbycity', '=', $to]
+        // ])->get();
 
-        foreach ($pp as $p) {
-            $p->finaldest = $p->tocity;
-            $p->tocity = $p->passbycity;
-            $p->to = $p->passBy;
-            $p->duration = $p->firstDuration;
-        }
+        // foreach ($pp as $p) {
+        //     $p->finaldest = $p->tocity;
+        //     $p->tocity = $p->passbycity;
+        //     $p->to = $p->passBy;
+        //     $p->duration = $p->firstDuration;
+        // }
 
-        $psts = $posts->merge($pp);
+        // $psts = $posts->merge($pp);
 
-        return response()->json(compact('psts'),201);
+        return response()->json(compact('posts'),201);
     }
+
+    public function all_posts() 
+    {
+        $posts = Post::all();
+        return response()->json(compact('posts'),201);
+    }
+
 }

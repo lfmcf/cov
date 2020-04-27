@@ -1,24 +1,22 @@
 import React, { Component } from 'react'
 import './conversationList.scss';
+import ConversationItem from './conversationItem';
+
 class ConversationList extends Component {
     
+    // handleClick = (e, id, unread) => {
+    //     console.log(e.target.parentNode)
+    //     this.props.getconvo(id, unread)
+    // }
     
     render() {
-        const { data } = this.props
-        console.log(data)
+        const { conversations, unreadMessages, getconvo } = this.props
         return(
            <div>
                <h1>CHATS</h1>
-                {data.map((dt) => (
-                    
-                    <div className="conversation-list-item" key={dt.c_id}>
-                        <img className="conversation-photo" src="https://randomuser.me/api/portraits/men/17.jpg" alt="conversation" />
-                        <div className="conversation-info"  onClick={() => this.props.getconvo(dt.c_id)}>
-                            <h1 className="conversation-title">{dt.nom}</h1>
-                            <p className="conversation-snippet">Test, which is a new approach to have all solutions
-                                        astrology under one roof.</p>
-                        </div>
-                    </div>
+              
+                {conversations.map((conversation) => (
+                   <ConversationItem conversation={conversation} unreadMessages={unreadMessages} key={conversation.c_id} getconvo={getconvo} />
                 ))}
            </div>
         );
