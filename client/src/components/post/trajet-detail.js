@@ -20,8 +20,10 @@ export default class Detail extends  Component {
             read: this.state.read,
             message: "i want ride with you" //message
         }
+        
         const token = cookies.get('token')
-        axios.post('api/message', message, {
+        console.log(message, token)
+        axios.post('api/insertmessage', message, {
             headers: {"X-Socket-Id": window.Echo.socketId(), Authorization: `Bearer ${token}` }
         }
         ).then(res => {
@@ -32,6 +34,7 @@ export default class Detail extends  Component {
     }
 
     render() {
+        
         moment.locale('fr')
         let post = this.props.location.state.post
         
@@ -39,9 +42,9 @@ export default class Detail extends  Component {
         
         var timeSeconds, secondsArriver, timeArriver;
         var time = moment(post.travelTime).format('HH:mm')
-        if(post.duration){
+        if(post.secondDuration){
             timeSeconds =  moment.duration(time).asSeconds()
-            const formatted = post.duration
+            const formatted = post.firstDuration
             secondsArriver = timeSeconds + formatted
             timeArriver = moment.utc(secondsArriver*1000).format('HH:mm');
         }else {
@@ -61,28 +64,28 @@ export default class Detail extends  Component {
             }
         }
         return (   
-            
             <div className='container'>
-                <div className="row justify-content-md-center">
-                    <div className="col-md-7 mt-4">
-                        <h3>{date}</h3>
-                        <ul className="list p-0 m-0 list-unstyled">
-                           <li>
-                                <time className="travelTime">{time}</time> 
-                                <div >
-                                    {post.fromcity}
-                                </div>
-                            </li> 
-                            <li>
-                               <time className="travelTime">{time}</time>
-                               <div >
-                                    {post.tocity}
-                                </div>
-                            </li> 
-                        </ul>
-                    </div>
-                                    
+                <div className="row justify-content-md-center" style={{border:"1px solid black"}}>
+                    <p>{date}</p>
+                    
+                    <table style={{width:"100%",marginTop:"50px"}}>
+                        <tbody>
+                            <tr>
+                                <td>{post.fromcity}</td>
+                                <td>{post.passbycity}</td>
+                                <td>{post.tocity}</td>
+                            </tr>
+                            <tr>
+                                <th>{post.price}</th>
+                                <th>{timeArriver}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
                 </div>
+                <div>
+                    <button onClick= {this.handleClick} >Reserver</button>
+                </div>  
             </div>
         )
     }

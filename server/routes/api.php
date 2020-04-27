@@ -25,12 +25,15 @@ Route::post('login', 'AuthController@login');
 Route::middleware('auth:api')->group(function () {
     Route::get('currentUser', 'AuthController@getAuthenticatedUser');
     Route::post('post', 'PostController@creatPost');
-    Route::get('messages', 'MessageController@getConversationList');
+    Route::get('conversations', 'MessageController@getConversationList');
     Route::post('message', 'MessageController@sendmessage');
 });
 
+
 Route::post('getMessage', 'MessageController@getMessage');
 Route::post('insertmessage', 'MessageController@insertmessage');
+Route::post('markread', 'MessageStatusController@markread');
+Route::get('unread', 'MessageStatusController@show');
 
 Route::get('auth/redirect/facebook', 'AuthController@redirectToProvider');
 Route::post('facebook/callback', 'AuthController@handleProviderCallback');
@@ -41,3 +44,7 @@ Route::get('email/resend', 'VerificationApiController@resend')->name('verificati
 Route::post('checkemail', 'AuthController@checkEmail');
 
 Route::post('search', 'PostController@search');
+
+Route::get("all_posts", "PostController@all_posts");
+
+

@@ -26,6 +26,12 @@ class MessageList extends Component {
                         </div>
                     }
                 })}
+                <div className="send_message" >
+                                <div style={{ backgroundColor: 'red', padding: "20px" }}>
+                                    <textarea onChange={this.handleChange}></textarea>
+                                    <button onClick={this.send}>Send</button>
+                                </div>
+                            </div>
             </div>
         );
     }

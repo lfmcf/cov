@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Home from './components';
 import { NavigationBar } from './components/layouts';
-import { Recherche, Search, Add_post_step_1,  Add_post_step_2, Trajetdetail} from './components/post';
+import { Recherche, Show, Add_post_step_1,  Add_post_step_2, Trajetdetail} from './components/post';
 import { Login, RegisterOption, RegisterMaster } from './components/authentification';
 import { Message } from './components/chat';
 import axios from 'axios';
@@ -12,10 +12,6 @@ import cookies from './components/assests/helpers/cookies';
 import PrivateRoute from './components/PrivateRoute';
 
 class App extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     // this.node = React.createRef();
-    // }
 
     state = {
         dropDownToggle: false,
@@ -24,26 +20,81 @@ class App extends Component {
         notice: null,
         message: '',
         redirecting: false,
-        data: [],
+        conversations: [],
         messages: [],
-        conversationBetween: {}
+        conversationBetween: {},
+        messageId: [],
+        unreadMessages: [],
+        style: {display: "none"}
     }
    
-
     Updateuser = async (token) => {
-        axios.get('api/user', {
-            headers: { Authorization: `Bearer ${token}`, }
-        }).then(res => {
-            
-            this.setState({user: res.data})
-            this.connetToChannel(token)
-        });
+        let user_id;
+        let result = await axios.get('api/user', {headers: { Authorization: `Bearer ${token}`, }})
+        let result1 = await axios.get('api/conversations', {headers: { Authorization: `Bearer ${token}` }})
 
-        let res = await axios.get('api/messages', {headers: { Authorization: `Bearer ${token}` }})
-        let items = []
-        res.data.map(ele => (items.push(ele)))
-        this.setState({data: items})
+        user_id = result.data.id
+
+        let result2 = await axios.get('api/unread', {params: {id: user_id}})
+
+        this.setState({
+            user: result.data,
+            conversations: result1.data,
+            notice: result2.data.length,
+            unreadMessages: result2.data
+        })
+
+        this.connetToChannel(token)
+
+        // axios.get('api/unread', {params: {id: user_id}}).then(res => {
+        //     res.data.length > 0 ? this.setState({notice: res.data.length, unreadMessages: res.data}) : this.setState({notice: ''});
+        // });
+
+        // let items = res.data
+
+        // this.setState({conversations: items})
     }
+
+    // getConversationMessages = async (val, unread) => {
+       
+    //     let res = await axios.post('api/getMessage', {val})
+       
+    //     this.setState({
+    //         messages: res.data.messages,
+    //         style: {display: "inline"}
+    //     })
+        
+    //     if(res.data.to_id.user_two === this.state.user.id){
+    //         this.setState(prevState => {
+    //             let conversationBetween = Object.assign({}, prevState.conversationBetween);  
+    //             conversationBetween.from = res.data.to_id.user_two;
+    //             conversationBetween.to = res.data.to_id.user_one;                     
+    //             return { conversationBetween };                              
+    //         })
+    //     }else {
+    //         this.setState(prevState => {
+    //             let conversationBetween = Object.assign({}, prevState.conversationBetween); 
+    //             conversationBetween.from = this.state.user.id;
+    //             conversationBetween.to = res.data.to_id.user_two;             
+    //             return { conversationBetween }; 
+    //         })
+    //     }
+    //     if(unread){
+    //         axios.post('api/markread', {val}).then(rs  => { 
+    //             var array = [...this.state.unreadMessages];
+                
+    //             var index = array.filter((ele) => { return ele.conversation_id !== val});
+                
+    //             //this.setState({unreadMessages: index});
+                
+    //             this.setState({
+    //                 notice:this.state.notice - unread,
+    //                 unreadMessages: index
+    //             })
+    //         });
+    //     }
+        
+    // }
 
     removeUser = () => {
         cookies.remove('token')
@@ -52,18 +103,17 @@ class App extends Component {
         })
     }
 
-    // toggleDropdown = (e) => {
-    //     console.log(this.node.current)
-    //     if (this.node.current !== null) {
-    //         if (this.node.current.contains(e.target)) {
-    //             this.setState({
-    //                 dropDownToggle: !this.state.dropDownToggle
-    //             })
-    //         } else {
-    //             this.setState({dropDownToggle: false})
-    //         }
-    //     }
-    // }
+    toggleDropdown = (e) => {
+        this.setState({dropDownToggle: true }, () => {
+            document.addEventListener('click', this.closeMenu);
+          });
+    }
+
+    closeMenu = (e) => {
+        this.setState({ dropDownToggle: false }, () => {
+            document.removeEventListener('click', this.closeMenu);
+          });
+    }
 
     connetToChannel = (token) => {
         window.Echo = new Echo({
@@ -80,35 +130,19 @@ class App extends Component {
             console.log(e)
             this.setState(prevState => ({
                 notice: this.state.notice + 1,
-                messages: [...prevState.messages, e.conversationrep]
+                messages: [...prevState.messages, e.conversationrep],
+                unreadMessages: [...prevState.unreadMessages, e.messagestatus]
             }));
+            
         });
     }
 
-    getConversationMessages = async (val) => {
-        let res = await axios.post('api/getMessage', {val})
-        let ListMessages = []
-        res.data.messages.map(ele => (ListMessages.push(ele)))
-        this.setState({messages: ListMessages})
-        if(res.data.to_id.user_two === this.state.user.id){
-            this.setState(prevState => {
-                let conversationBetween = Object.assign({}, prevState.conversationBetween);  // creating copy of state variable jasper
-                conversationBetween.from = res.data.to_id.user_two;
-                conversationBetween.to = res.data.to_id.user_one;                     // update the name property, assign a new value                 
-                return { conversationBetween };                                 // return new object jasper object
-            })
-        }else {
-            this.setState(prevState => {
-                let conversationBetween = Object.assign({}, prevState.conversationBetween);  // creating copy of state variable jasper
-                conversationBetween.from = this.state.user.id;
-                conversationBetween.to = res.data.to_id.user_two;                     // update the name property, assign a new value                 
-                return { conversationBetween };                                 // return new object jasper object
-            })
-        }
-    }
-
     componentDidMount() {
-        document.body.addEventListener('click', this.toggleDropdown, false);
+        var item = {
+            name : "mmmm",
+            isComplete: false
+        }
+
         window.io = require('socket.io-client');
         const token = cookies.get('token')
         
@@ -118,22 +152,26 @@ class App extends Component {
         this.props.hideLoader();
     }
 
+    
+    
+
     render() {
-        const { user, data, messages, conversationBetween } = this.state
+        const { user, conversations, messages, conversationBetween, messageId , unreadMessages, style} = this.state
+        console.log("App render")
         return (
             <Router>
                 <div>
-                <NavigationBar dropDownToggle={this.state.dropDownToggle} node={this.node} user={this.state.user} removeUser={this.removeUser} />
+                <NavigationBar dropDownToggle={this.state.dropDownToggle} user={this.state.user} removeUser={this.removeUser} toggleDropdown={this.toggleDropdown} notice={this.state.notice} />
                 <Route exact path="/" component={Home}></Route>
-                <Route path="/search" render={(props) => <Recherche {...props} showLoader={this.props.showLoader} hideLoader={this.props.hideLoader} />} />
-                <Route path="/show" component={Search} />
-                <Route path="/trajet-detail" render={(props) => <Trajetdetail {...props}  />} />
+                <Route path="/recherche" render={(props) => <Recherche {...props} showLoader={this.props.showLoader} hideLoader={this.props.hideLoader} />} />
+                <Route path="/show" component={Show} />
+                <Route path="/trajet-detail" render={(props) => <Trajetdetail {...props} user={user} />} />
                 <Route path="/add_post_step_1" component={Add_post_step_1} />
                 <Route path="/post-next" component={Add_post_step_2} />
                 <Route path="/login" render={(props) => <Login {...props} updateUser={this.Updateuser} />} />
                 <Route path="/inscription"  component={RegisterOption} />
                 <Route path="/register-email" render={(props) => <RegisterMaster {...props} /> } />
-                <PrivateRoute path="/messages" component={ props => <Message {...props} data={data} getConversationMessages={this.getConversationMessages} messages={messages} conversationBetween={conversationBetween} user_id={user.id} />} />
+                <PrivateRoute path="/messages" component={ props => <Message {...props} conversations={conversations} messages={messages} getConversationMessages={this.getConversationMessages} user_id={user.id} conversationBetween={conversationBetween} messageId={messageId} unreadMessages={unreadMessages} style={style} />} />
                 </div>
             </Router>
         )

@@ -181,7 +181,7 @@ class Add_post_step_1 extends Component {
             dt: this.state.mnt.format("YYYY-MM-DD HH:mm:ss"),
             infos: this.state.infos
         }
-        
+        console.log(post)
         localStorage.setItem('post', JSON.stringify(post))
         this.props.history.push('/post-next')
     }
@@ -192,10 +192,7 @@ class Add_post_step_1 extends Component {
         })
     }
 
-    componentWillMount() {
-        
-        
-    }
+    
     
     render() {
         const shortcuts = {

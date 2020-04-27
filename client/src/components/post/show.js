@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import './search.scss';
+import './show.scss';
 import RenderResult from './RenderResult';
 
 class Search extends Component {
@@ -8,38 +8,40 @@ class Search extends Component {
     state = {
         listItems: '',
         firstData: '',
-        isFetching: false
+        isFetching: false,
+        vers: '',
     }
     componentDidMount() {
         var prevPath = this.props.location.state
-        if(prevPath !== undefined) {
+        if (prevPath !== undefined) {
             var data = this.props.location.state.data
             this.setState({
                 listItems: data,
-                firstData: data.slice(0, 20)
+                firstData: data.slice(0, 20),
+                vers: this.props.location.state.vers
             })
-        }else {
+        } else {
             this.props.history.push({
-                pathname : 'search'
-            })    
+                pathname: 'recherche'
+            })
         }
         window.addEventListener('scroll', this.handleScroll, { passive: true });
     }
 
     handleScroll = () => {
-        if(window.innerHeight + window.scrollY !== document.documentElement.offsetHeight) {
+        if (window.innerHeight + window.scrollY !== document.documentElement.offsetHeight) {
             return
-        }else {
+        } else {
             this.setState({
                 isFetching: true
             })
             this.fetchMoreListItems();
         }
-        
+
     }
 
     fetchMoreListItems = () => {
-        const {firstData,listItems}  = this.state
+        const { firstData, listItems } = this.state
         setTimeout(() => {
             const dt = listItems.slice(firstData.length, firstData.length + 20)
             const rs = firstData.concat(dt)
@@ -47,7 +49,7 @@ class Search extends Component {
                 firstData: rs,
                 isFetching: false
             })
-            
+
         }, 1000)
     }
 
@@ -55,36 +57,39 @@ class Search extends Component {
         window.removeEventListener('scroll', this.handleScroll, { passive: true });
     }
 
-    handleClick = (e, post) => {
+    handleClick = (post) => {
+        
         this.props.history.push({
-            pathname : 'trajet-detail',
+            pathname: 'trajet-detail',
             state: { post: post }
         })
     }
 
     render() {
-        const {firstData,isFetching,listItems}  = this.state
-        
-        if(firstData.length > 0) {
+        const { firstData, isFetching, listItems, vers} = this.state
+
+        if (firstData.length > 0) {
             var date = moment(firstData[0].travelTime).format('dddd, Do MMMM')
-            return(
+            return (
                 <div className="container">
-                    <div style={{textAlign:"center", margin:"42px 0"}}>
-                        <p style={{margin:"10px"}}> {date}</p>
+                    <div style={{ textAlign: "center", margin: "42px 0" }}>
+                        <p style={{ margin: "10px" }}> {date}</p>
                         {/* {firstData[0].fromcity} <span className="fa fa-arrow-right"></span> {firstData[0].tocity}, */}
                         <p>{listItems.length} trajets allant de {firstData[0].fromcity} à {firstData[0].tocity} publiés</p>
                     </div>
-                    {firstData.map((post) => <RenderResult key={post.id} from={post.fromcity} to={post.tocity} post={post} handleClick={this.handleClick} />)}
-                    <div style={{textAlign:"center", margin:"10px"}}>
+                    {/* <div className="container-results"> */}
+                        {firstData.map((post) => <RenderResult key={post.id} from={post.fromcity} to={post.tocity} post={post} vers={vers} handleClick={this.handleClick} />)}
+                    {/* </div> */}
+                    <div style={{ textAlign: "center", margin: "10px" }}>
                         <p>{isFetching && "Récupérer plus d'éléments..."}</p>
                     </div>
                 </div>
             )
         }
-        return(
+        return (
             <div>Rien Trouvé</div>
         )
-        
+
     }
 }
 

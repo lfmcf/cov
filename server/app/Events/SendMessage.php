@@ -13,22 +13,24 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use App\Message;
 use App\Conversation;
 use App\ConversationReply;
-
+use App\MessageStatus;
 class SendMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets;
 
     public $conversationrep;
     public $conversation;
+    public $messagestatus;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(ConversationReply $conversationrep,Conversation $conversation )
+    public function __construct(ConversationReply $conversationrep,Conversation $conversation, MessageStatus $messagestatus )
     {
         $this->conversationrep = $conversationrep;
         $this->conversation = $conversation;
+        $this->messagestatus = $messagestatus;
     }
 
     /**

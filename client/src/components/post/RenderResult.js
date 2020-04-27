@@ -1,43 +1,64 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react';
 import moment from 'moment';
 import './RenderResult.scss';
-class RenderResult extends  Component {
-    render() {
-        const { post } = this.props
-        var tt = moment.utc(post.firstDuration*1000).format('HH:mm');
-        var vv = moment.utc(post.secondDuration*1000).format('HH:mm');
-        var timeDepart = moment(post.travelTime).format('HH:mm');
-        var date = moment(post.travelTime).format('DD/MM/YYYY');
-        var first_travel_time = moment.duration(timeDepart).asSeconds() + post.firstDuration;
-        first_travel_time = moment.utc(first_travel_time*1000).format('HH:mm');
-        if (post.secondDuration) {
-            var second_travel_time = moment.duration(timeDepart).asSeconds() + post.firstDuration + post.secondDuration;
-            second_travel_time = moment.utc(second_travel_time * 1000).format('HH:mm');
+class RenderResult extends Component {
 
-            return (
-                <div className="container-results">
-                    <div className="holder">
-                        <div className="item-from item" >
-                            <span>{timeDepart}</span>, <p style={{display:"inline"}}>{post.fromcity}</p>
-                        </div>
-                        <div className="item-parent">
-                            <div className="item-arrow">
-                            <span className="dot"></span>
-                            <span className="arrow"></span>
-                            <span className="dot"></span>
+   
+    render() {
+        const { post, vers } = this.props
+        
+        var timeDepart = moment(post.travelTime).format('HH:mm');
+        
+        var first_travel_time = moment.duration(timeDepart).asSeconds() + post.firstDuration;
+        var arriver, prix, time = "";
+        first_travel_time = moment.utc(first_travel_time * 1000).format('HH:mm');
+        var second_travel_time = moment.duration(timeDepart).asSeconds() + post.firstDuration + post.secondDuration;
+        second_travel_time = moment.utc(second_travel_time * 1000).format('HH:mm');
+
+        if (new Intl.Collator().compare(post.tocity, vers) >= 0) {
+            arriver = post.tocity
+            prix = post.price
+            time = second_travel_time
+        } else {
+            arriver = post.passbycity
+            prix = post.price - post.PassByPrice
+            time = first_travel_time
+        }
+        return (
+            <div className="container-results" onClick={() => this.props.handleClick(post)}>
+                <div className="item-infos">
+                    <div className="flex-items">
+                        <div className="time-items">
+                            <div>
+                                {timeDepart}
                             </div>
-                            <div style={{textAlign:"center",fontSize:"10px"}}><p style={{marging:"0"}}>{post.price} dh</p></div>
+                            <div className="bottom-items">
+                                {time}
+                            </div>
+                        </div>
+                        <div className="vl"></div>
+                        <div>
+                            <div>
+                                {post.fromcity}
+                            </div>
+                            <div className="bottom-items">
+                                {arriver}
+                            </div>
                         </div>
                     </div>
                 </div>
-            )
-        }else {
-            return(
-                <div className="container-results">
+                <div className="item-prix">
+                    {prix} dh
+               </div>
+                <div className="item-user">
+                    <div className="image-user-name">
+                        <a href="">{post.users.nom}</a>
+                    </div>
                     
+                    <img src={post.users.avatar} alt="user-image" className="item-user-image" />
                 </div>
-            )
-        }
+            </div>
+        )
     }
 }
 
